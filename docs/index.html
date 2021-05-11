@@ -1,0 +1,226 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=width", initial-scale="1.0">
+    <title>LearnSQL</title>
+</head>
+<body>
+    <pre>
+        <p align="center"><b><u>*****-----Learning SQL Hand Page-----*****</u></b></p>
+       <b> What is SQL: </b>
+            Prog lang specifically designed for working with DB to:
+                CREATE  
+                MANIPULATE  
+                SHARE/ACCESS 
+        ==============================================================================================================    
+        <b>Normalization:</b>
+            Decompose larger, complex table into simpler & smaller ones Moves from normal forms to higher normal forms
+                1NF : All attributes in the relations should be individual.
+                      There should be no repeating elements or group of elements.
+                2NF : Relation should be in 1NF.
+                      Partial Dependency is not allowed. Rather individual table is recommended.
+                3NF : It is in 2NF. No indirect relationship is allowed.
+        ==============================================================================================================
+        <b>Data Types:</b>
+            Numeric: bit, tinyint, smallint, int, bigint, decimal, numeric, float, real
+            Char/String: Char, Varchar, Text
+            Date/Time: Date, Time, Datetime, Timestamp, Year
+            Misc: Json, XML
+        ==============================================================================================================    
+        <b>Constraints(NN-D-U-Pr-Ch-I{NunDuParChee}):</b>
+            Not Null: Columns must not have a NULL value.
+            Default: Provide a Default val for a col when NONE is specified. 
+            Unique: All the val in a col are diff.
+            Primary: Each row/record in a DB table must be unique.
+            Check: All val in a col satisfy certain conditions.
+            Index: Creates and Retrieves data from DB very quickly.
+        ==============================================================================================================
+        <b>SQL Command Groups:</b>
+            DDL (Data Definition Language): Creation of Objects
+            DML (Data Manipulation Language): Manipulation of Data        
+            DCL (Data Control Language): Assignment and Removal of Permissions
+            TCL (Transaction Control Language): Saving and Restoring Changes to a DB
+        ==============================================================================================================
+        <u>DDL:</u>
+            CREATE : Creates Objects in DB/DB obj
+            ALTER : Alters structures of DB/DB obj 
+            DROP : Deletes obj from DB
+            TRUNCATE : Removes all records from a table permanently
+            RENAME : Renames an Object
+            
+            [Row: Record :: Col: Field]
+
+            CREATE SYNTAX:
+                CREATE TABLE table_name{
+                    col1 datatype (datatype_Size) NOT NULL,
+                    col2 datatype (datatype_Size),
+                    PRIMARY KEY (col1)
+                };
+            -------------------------------------------------------------------------------------------------------
+            ALTER SYNTAX:
+                ALTER TABLE table_name ADD COLUMN col_name col_data_type (col_datatype_size);     
+            -------------------------------------------------------------------------------------------------------
+            RENAME SYNTAX:
+                ALTER TABLE table_name RENAME COLUMN col_name TO new_col_name;
+            -------------------------------------------------------------------------------------------------------
+            TRUNCATE SYNTAX:
+                TRUNCATE TABLE table_name;       
+            -------------------------------------------------------------------------------------------------------
+            DROP SYNTAX:
+                DROP TABLE table_name
+        ==============================================================================================================
+
+        <u>DML:</u>
+            INSERT : Insert Data into Table
+            UPDATE : Update existing Data within a Table
+            DELETE : Deletes Specified/all Records from a Table        
+            
+            INSERT SYNTAX:
+                INSERT INTO table_name
+                (col1,col2,...,coln) VALUES
+                (val1,val2,...,valn);
+            -------------------------------------------------------------------------------------------------------
+            UPDATE SYNTAX:
+                UPDATE table_name
+                SET col_n = new_val
+                WHERE coln(primarykey) = val;
+            -------------------------------------------------------------------------------------------------------
+            DELETE SYNTAX:
+                DELETE FROM table_name WHERE
+                col_n IN (valm,valn...);
+        ==============================================================================================================
+        <u>DCL:</u>
+            GRANT : Gives Access Privileges to DB
+            REVOKE : Withdrawn access Privileges with the GRANT command
+            
+            GRANT SYNTAX:
+                GRANT <(privilege list)> ON <(Relation Name)> TO USER
+            -------------------------------------------------------------------------------------------------------
+            REVOKE SYNTAX:
+                REVOKE <(privilege list)> ON <(Relation Name)> TO USER
+        ==============================================================================================================
+        <u>TCL:</u>
+            COMMIT : Saves the Work Done
+            ROLLBACK : Restores DB to Origin State since the Last Commit 
+            SAVEPOINT : Identify a Point in a Transaction to Which You can
+                        Roll Back Later
+
+            COMMIT SYNTAX:
+                
+            ROLLBACK SYNTAX:
+                
+            SAVEPOINT SYNTAX:
+        ==============================================================================================================        
+        <b>SQL Operators--Filter:</b>
+            WHERE Clause : Used to Specify a Condition While fatching the data from a Single Table or by joining with multiple Tables
+                WHERE Syntax:
+                    SELECT * FROM table_name WHERE col_n=val_n;
+            -------------------------------------------------------------------------------------------------------
+            GROUP BY Clause : Arrange Identical Data into Groups
+                GROUP BY SYNTAX:
+                    SELECT condition(col_name) FROM table_name GROUP BY col_name
+            -------------------------------------------------------------------------------------------------------
+            ORDER BY Clause : Used to Sort Output of SELECT Statement. Default is 
+                                to sort in ASC (Ascending). DESC (Descending Name)
+                ORDER BY SYNTAX:
+                    SELECT * FROM table_name ORDER BY col_name ASC/DESC;
+            -------------------------------------------------------------------------------------------------------
+            HAVING Clause : Used with Aggregate function due to its non-performance in the WHERE Clause. Must Follow GROUP BY Clause in a Query
+                            and Must also precede the ORDER BY Clause, if used.
+                HAVING SYNTAX:
+                    SELECT col_name FROM table_name
+                    WHERE condition GROUP BY col_name
+                    HAVING condition ORDER BY col_name;
+        ==============================================================================================================     
+        <b>SQL Operators--Logical:</b>
+            AND SYNTAX with WHERE:
+                SELECT * FROM table_name WHERE col_n=val_n AND col_m = val_m;
+            -------------------------------------------------------------------------------------------------------
+            OR SYNTAX with WHERE:
+                SELECT * FROM table_name WHERE col_n=val_n OR col_m = val_m;
+            -------------------------------------------------------------------------------------------------------
+            NOT SYNTAX with WHERE:
+                SELECT * FROM table_name WHERE col_n=val_n AND col_m != val_m;
+        ==============================================================================================================
+        <b>SQL Operators--Comparison:</b>
+            [{Operators(>,>=,<,<=,<>,!=)}]
+        ==============================================================================================================
+        <b>SQL Operators--Special:</b>
+            BETWEEN : Checks an attribute within Range
+                SELECT * FROM table_name WHERE col_n BETWEEN range1 AND range2;
+            -------------------------------------------------------------------------------------------------------
+            LIKE : Checks an attribute val matches a given String Pattern
+                SELECT * FROM table_name WHERE col_n like 'string_val';
+            -------------------------------------------------------------------------------------------------------
+            IS NULL : Checks an arrtibute Value is NULL
+                SELECT * FROM table_name WHERE col_n IS NULL;
+            -------------------------------------------------------------------------------------------------------
+            IN : Checks an attribute val matches any value within a val list
+                SELECT * FROM table_name WHERE col_n in (condition1,condition2...);
+            -------------------------------------------------------------------------------------------------------
+            DISTINCT : Limits val to Unique val
+                SELECT DISTINCT(coln) FROM table_name;
+        ==============================================================================================================
+        <b>SQL Operators--Aggregations:</b>
+            AVG() : Returns Average val from specified col
+            COUNT() : Returns number of Table Row 
+            MAX() : Returns Largest val among the Records
+            MIN() : Returns Smallest val among the Records
+            SUM() : Returns the Sum of Specified col val
+            -------------------------------------------------------------------------------------------------------
+            SYNTAX:
+                SELECT operator(col_n) FROM table_name;
+            -------------------------------------------------------------------------------------------------------
+            UNION: Combines the result-set of 2 or more SELECT statements removing duplicates.      
+            SYNTAX:
+                SELECT col_m FROM table_1
+                UNION
+                SELECT col_m FROM table_2;
+            -------------------------------------------------------------------------------------------------------
+            Remark: To UNION all the rows including duplicates, use UNION ALL command.    
+        ==============================================================================================================
+        <b>SQL Joins--Combine row/cols from 2 or more tables, based on related cols between them</b>
+            INNER JOIN : Returns rows when there is a match in Both Tables
+            SYNTAX:
+                SELECT table1.col1, table2.col2,...,table1.coln 
+                FROM table1 table1_alias INNER JOIN table2 table2_alias
+                ON table1_alias.commonfield = table2_alias.commonfield;
+            -------------------------------------------------------------------------------------------------------
+            Remark: table1_alias is optional.
+            -------------------------------------------------------------------------------------------------------
+            LEFT JOIN : Returns all rows from the Left Table, even if there are no matches in the right table
+            SYNTAX:
+                SELECT table1.col1, table2.col2,...,table1.coln 
+                FROM table1 table1_alias LEFT JOIN table2 table2_alias
+                ON table1_alias.commonfield = table2_alias.commonfield;
+            -------------------------------------------------------------------------------------------------------
+            RIGHT JOIN : Returns all the rows from the Right Table, even if there are no matches in the Left Table
+            SYNTAX:
+                SELECT table1.col1, table2.col2,...,table1.coln 
+                FROM table1 table1_alias RIGHT JOIN table2 table2_alias
+                ON table1_alias.commonfield = table2_alias.commonfield;
+            -------------------------------------------------------------------------------------------------------
+            FULL OUTER JOIN : Returns all records when there is a match in left or right table records
+            SYNTAX:
+                SELECT column_name(s)
+                FROM table1
+                FULL OUTER JOIN table2
+                ON table1.coln = table2.coln
+                WHERE condition;
+            -------------------------------------------------------------------------------------------------------
+            SELF JOIN : Used to join a table to itself by giving it an alias
+            SYNTAX:
+                SELECT column_name(s)
+                FROM table1 table1_alias, table1 table2_alias
+                WHERE condition;
+
+            -------------------------------------------------------------------------------------------------------
+            CARTESIAN JOIN(CROSS JOIN) : 
+            SYNTAX:
+                SELECT table1.col1, table2.col2,...,table1.coln 
+                FROM table1
+                CROSS JOIN table2;
+        ==============================================================================================================
+    </pre>
+</body>
+</html>
